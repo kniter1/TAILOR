@@ -36,7 +36,7 @@ from .module_audio import AudioModel, AudioConfig, AudioOnlyMLMHead
 from .module_cross import CrossModel, CrossConfig
 from .module_decoder import DecoderModel, DecoderConfig
 from .until_module import getBinaryTensor, GradReverse, CTCModule
-from warpctc_pytorch import CTCLoss
+# from warpctc_pytorch import CTCLoss
 import warnings
 warnings.filterwarnings("ignore")
 logger = logging.getLogger(__name__)
