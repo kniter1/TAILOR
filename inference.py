@@ -11,14 +11,13 @@ import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 import time
 import argparse
-from src.models.models import Tagging_UniVL
+from src.models.models import TAILOR
 from src.models.optimization import BertAdam
 from torch.utils.data import DataLoader
 import torch.utils.data as data
 from util import parallel_apply, get_logger
 from src.dataloaders.cmu_dataloader import MOSEI_Dataset, MOSEI_Dataset_no_align
 from src.utils.eval import get_metrics
-#torch.distributed.init_process_group(backend="nccl")
 
 global logger
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -35,13 +34,12 @@ def dataloader_test(args):
         num_workers=4,
         pin_memory=False,
         shuffle=False,
- #       sampler=val_sampler,
         drop_last=True   
     )
     test_length = len(test_dataset)
     return  label_input, label_mask, test_dataloader, test_length
 
-def load_model(args, n_gpu, device, model_file=None): #模型加载
+def load_model(args, n_gpu, device, model_file=None):
     logger.info("**** loading model_file=%s *****", model_file)
 
     if os.path.exists(model_file):
@@ -49,7 +47,7 @@ def load_model(args, n_gpu, device, model_file=None): #模型加载
         if args.local_rank == 0:
             logger.info("Model loaded from %s", model_file)
         # Prepare model
-        model = Tagging_UniVL.from_pretrained(args.bert_model, args.visual_model, args.audio_model, args.cross_model, args.decoder_model, state_dict=model_state_dict,task_config=args)
+        model = TAILOR.from_pretrained(args.bert_model, args.visual_model, args.audio_model, args.cross_model, args.decoder_model, state_dict=model_state_dict,task_config=args)
 
 
         model.to(device)
@@ -58,7 +56,6 @@ def load_model(args, n_gpu, device, model_file=None): #模型加载
         model = None
     return model
 
-#save_path = '/home/tione/notebook/test_5k_2nd_cross_embedding'
 def model_test(model, test_dataloader, device, label_input, label_mask):
     model.eval()
     label_input = label_input.to(device)
@@ -84,7 +81,6 @@ parser.add_argument("--data_path", type=str, help='cmu_mosei data_path')
 parser.add_argument("--model_file", type=str, help="model store path")
 parser.add_argument("--output_dir", default=None, type=str, required=True,
                         help="The output directory where the model predictions and checkpoints will be written.")
-#parser.add_argument("--epoch", type=int, help="choice nums models")
 parser.add_argument('--max_words', type=int, default=60, help='')
 parser.add_argument('--max_frames', type=int, default=60, help='')
 parser.add_argument('--max_sequence', type=int, default=60, help='')
@@ -105,7 +101,7 @@ parser.add_argument('--audio_num_hidden_layers', type=int, default=4, help="Laye
 parser.add_argument('--cross_num_hidden_layers', type=int, default=3, help="Layer NO. of cross.")
 parser.add_argument('--decoder_num_hidden_layers', type=int, default=1, help="Layer NO. of decoder.")
 parser.add_argument("--common_dim",type=int, default=256)
-parser.add_argument('--batch_size', type=int, default=64, help='batch size')#训练集bh
+parser.add_argument('--batch_size', type=int, default=64, help='batch size')
 parser.add_argument('--seed', type=int, default=42, help='random seed') 
 args = parser.parse_args()
 n_gpu = 1
