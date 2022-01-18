@@ -1,0 +1,4 @@
+tqdm
+requests
+opencv-python
+boto3
