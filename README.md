@@ -20,6 +20,8 @@ TAILOR comprises three modules: Unimodal Extractor, Adversarial Multi-modal Refi
 
 |CMU-MOSEI| [Aligned](https://drive.google.com/file/d/1A7HTBxle5AOFt66mqNIRDM3DOws_tNXH/view?usp=sharing) | [UnAligned](http://immortal.multicomp.cs.cmu.edu/raw_datasets/processed_data/cmu-mosei/seq_length_50/mosei_senti_data_noalign.pkl) |
 | ---- | ---- | ---- |
+
+
 Note that since the labels in the unaligned data are single-label, we only use the features, and the labels are obtained from the aligned data
 
 ### Model
