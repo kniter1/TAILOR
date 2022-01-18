@@ -8,7 +8,7 @@ import torch
 import numpy as np
 import random
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "3"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 import time
 import argparse
 from src.models.models import TAILOR
