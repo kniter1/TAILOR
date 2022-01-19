@@ -4,14 +4,26 @@
 > Pytorch implementation for Tailor Versatile Multi-modal Learning for Multi-label Emotion Recognition
 
 ## Paper
-[**Tailor Versatile Multi-modal Learning for Multi-label Emotion Recognition**](https://aaai.org/Conferences/AAAI-22/aaai22call/)
+[**Tailor Versatile Multi-modal Learning for Multi-label Emotion Recognition**](https://arxiv.org/abs/2201.05834)
+
+To be published in AAAI 2022
 
 Please cite our paper if you find our work useful for your research:
+```tex
+@misc{zhang2022tailor,
+      title={Tailor Versatile Multi-modal Learning for Multi-label Emotion Recognition}, 
+      author={Yi Zhang and Mingyuan Chen and Jundong Shen and Chongjun Wang},
+      year={2022},
+      eprint={2201.05834},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
 ## Overview
 
 ### Overall Architecture for TAILOR
 <p align="center">
-<img src='imgs/architecture.png' width="500px"/>
+<img src='imgs/architecture.png' width="600px"/>
 
 TAILOR comprises three modules: Unimodal Extractor, Adversarial Multi-modal Refinement and Label-Modal Alignment. Unimodal Extractor is designed to extract the visual features, audio features and text features with sequence level context separately. Adversarial Multi-modal Refinement is designed to extract common and private representations collaboratively. Label-Modal Alignment is designed to gradually fuse these representations in a granularity descent way and incorporated with label semantics to generate tailored label representation. 
 ## Usage
