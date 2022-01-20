@@ -388,7 +388,7 @@ class TAILOR(TAILORPreTrainedModel):
         return  pc_pooled_output, pc_cross_output, pc_concat_mask
     
 
-    def interfence(self, text, text_mask, visual, visual_mask, audio, audio_mask, \
+    def inference(self, text, text_mask, visual, visual_mask, audio, audio_mask, \
                 label_input, label_mask, groundTruth_labels=None):
         label_input = label_input.unsqueeze(0)
         batch = text.size(0)

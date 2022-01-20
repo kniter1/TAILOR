@@ -66,7 +66,7 @@ def model_test(model, test_dataloader, device, label_input, label_mask):
         for _, batch in enumerate(test_dataloader):
             batch = tuple(t.to(device) for t in batch)
             text, text_mask, video, video_mask, audio, audio_mask, ground_trunth_labels = batch
-            batch_pred, true_label = model.interfence(text, text_mask, video, video_mask, audio, audio_mask, label_input, label_mask, ground_trunth_labels=ground_trunth_labels)
+            batch_pred, true_label = model.inference(text, text_mask, video, video_mask, audio, audio_mask, label_input, label_mask, ground_trunth_labels=ground_trunth_labels)
             total_pred.append(batch_pred)
             total_true_label.append(true_label)
         
